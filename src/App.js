@@ -1,24 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Grid from './grid.jsx'
+import Node1 from './node'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+          <div>
+              <h1 style={{textAlign: "center"}}>Pathfinding Visualizer</h1>
+          </div>
+          <div className="visualize">
+              <button style={{backgroundColor: "darkcyan",height: 50, width: 100}}>Visualize</button>
+          </div>
+      <div className={"container"}>
+        <Grid />
+      </div>
+      </>
   );
 }
 
