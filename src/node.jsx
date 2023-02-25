@@ -2,8 +2,8 @@ import React, {Component, useState} from "react";
 
 class Node1 extends Component{
     constructor(props){
-        super();
-        this.state = {block: false, start: false, target: false, visited: false, dist: -1};
+        super(props);
+        this.state = {block: props.info.block, start: props.info.start, target: props.info.target, visited: props.info.visited, dist: -1};
     }
     bg_set(){
         if(this.state.start)
