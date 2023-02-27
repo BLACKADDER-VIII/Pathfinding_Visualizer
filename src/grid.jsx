@@ -2,25 +2,23 @@ import React, {Component} from "react";
 import node_info from './node_info'
 
 import Node1 from './node'
-class Grid extends Component{
-    constructor() {
-        super();
-        this.grid = new Array(10);
-        for (let i = 0; i < 20; i++) {
-            this.grid[i] = new Array(10);
-            for (let j = 0; j < 40; j++) {
-                this.grid[i][j]= new node_info(false,false,false,false);
-            }
-        }
-    }
-    render() {
+import bfs from "./BFS";
+import { useState} from "react";
+import {renderIntoDocument} from "react-dom/test-utils";
+
+const Grid = (props)=>{
+        const [grid, set_grid] = useState(props.grid);
+        const [trigger, set_trigger] = useState(true);
         return (
+            <>
             <div className="Grid">
-                {this.grid.map(e => e.map(f=><Node1 info={f} />))}
-                {this.grid[10][8].start = true}
-                {this.grid[10][32].target = true}
+                {grid.map(e => e.map(f=><Node1 info={f} />))}
+                {grid[10][8].start = true}
+                {grid[10][32].target = true}
+                <button onClickCapture={()=>{bfs(grid,[10,8]); set_trigger(!trigger)}}>BFS</button>
+                <button onClickCapture={()=>grid.map(e=>e.map(f=>console.log(f)))}>Show</button>
             </div>
+                </>
         );
-    }
 }
 export default Grid;

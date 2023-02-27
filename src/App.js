@@ -1,9 +1,15 @@
 import './App.css';
 import Grid from './grid.jsx'
 import Node1 from './node'
+import bfs from "./BFS";
+import node_info from "./node_info";
 function App() {
-    const v_click = ()=>{
-
+    let grid = new Array(20);
+    for (let i = 0; i < 20; i++) {
+        grid[i] = new Array(40);
+        for (let j = 0; j < 40; j++) {
+            grid[i][j]= new node_info(false,false,false,false);
+        }
     }
   return (
       <>
@@ -14,7 +20,7 @@ function App() {
               <button style={{backgroundColor: "darkcyan",height: 50, width: 100}} onClickCapture={()=>alert("Clicked")}>Visualize</button>
           </div>
       <div className={"container"}>
-        <Grid />
+        <Grid grid={grid}/>
       </div>
       </>
   );
