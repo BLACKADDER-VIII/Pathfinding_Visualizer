@@ -9,5 +9,6 @@ export default class node_info {
         this.visited = false;
         this.parent = [];
         this.in_path = false;
+        this.clear = true;
     }
 }

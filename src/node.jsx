@@ -23,6 +23,7 @@ const Node1 = ({info})=>{
     }
     useEffect(()=>{set_visited(info.visited);},[info.visited]);
     useEffect(()=>set_in_path(info.in_path), [info.in_path]);
+    useEffect(()=>{set_block(info.block)},[info.clear]);
     useEffect(()=>{info.block = block}, [block]);
         return(
             <button style={{backgroundColor: bg_set(), padding: 6, borderWidth: 0.1,borderColor:"black", margin: 0, height: 30}} onMouseOver={()=>handle_mouse_click()} onDoubleClick={()=>console.log(info)}></button>

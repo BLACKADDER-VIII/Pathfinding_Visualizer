@@ -18,8 +18,16 @@ class Grid extends Component{
                 this.setState({trigger: !this.state.trigger});
             },10*i);
         }
-        for(let i = 0;i<this.path.length;i++){
-            this.grid[this.path[i][0]][this.path[i][1]].in_path = true;
+        setTimeout(()=>{
+            this.draw_path();
+        },10*this.order_arr.length);
+    }
+    draw_path(){
+        for(let i = 0; i <this.path.length; i++) {
+            setTimeout(() => {
+                    this.grid[this.path[i][0]][this.path[i][1]].in_path = true;
+                    this.setState({trigger: !this.state.trigger});
+            }, 100 * i);
         }
     }
     render() {
@@ -31,7 +39,8 @@ class Grid extends Component{
                     {this.grid[10][32].target = true}
                     <button onClickCapture={() => {
                         this.path = bfs(this.grid, this.start, this.order_arr);
-                        this.animate()
+                        this.animate();
+                        //this.draw_path();
                     }}>BFS
                     </button>
                     <button onClickCapture={() => this.grid.map(e => e.map(f => console.log(f)))}>Show</button>

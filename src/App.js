@@ -1,5 +1,5 @@
 import './App.css';
-import Grid from './grid.jsx'
+import Grid from './grid_func'
 import Node1 from './node'
 import bfs from "./BFS";
 import node_info from "./node_info";
