@@ -8,7 +8,7 @@ function App() {
     for (let i = 0; i < 20; i++) {
         grid[i] = new Array(40);
         for (let j = 0; j < 40; j++) {
-            grid[i][j]= new node_info(false,false,false,false);
+            grid[i][j]= new node_info();
         }
     }
   return (
