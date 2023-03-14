@@ -6,17 +6,16 @@ const Node1 = ({info})=>{
     const [target, set_target] = useState(info.target);
     const [visited, set_visited] = useState(info.visited);
     const [in_path, set_in_path] = useState(info.in_path);
-    //this.state = {block: props.info.block, start: props.info.start, target: props.info.target, visited: props.info.visited, dist: -1};
     function bg_set(){
         if(start)
             return "red";
         if(target)
             return "yellow";
+        if(block)
+            return "green";
         if(in_path)
             return "black";
-        if(visited)
-            return "cyan";
-        return block? "green":"blue";
+        return visited? "cyan":"blue";
     }
     function handle_mouse_click(){
         set_block( (start || target)? false: !block);

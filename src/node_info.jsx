@@ -10,5 +10,7 @@ export default class node_info {
         this.parent = [];
         this.in_path = false;
         this.clear = true;
+        this.dist = Infinity;
+        this.completed = false;
     }
 }

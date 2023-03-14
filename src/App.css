@@ -3,8 +3,7 @@
   display: grid;
   grid-template-columns: repeat(40,1fr);
   border-spacing: 0;
-  outline: black;
-  outline-width: 1px;
+  outline: black 1px;
   padding: 0;
 }
 .container{

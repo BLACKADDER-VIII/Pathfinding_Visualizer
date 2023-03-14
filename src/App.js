@@ -3,6 +3,7 @@ import Grid from './grid_func'
 import Node1 from './node'
 import bfs from "./BFS";
 import node_info from "./node_info";
+import {useRef, useState} from "react";
 function App() {
     let grid = new Array(20);
     for (let i = 0; i < 20; i++) {
@@ -16,9 +17,7 @@ function App() {
           <div>
               <h1 style={{textAlign: "center", backgroundColor: "cyan"}}>Pathfinding Visualizer</h1>
           </div>
-          <div className="visualize">
-              <button style={{backgroundColor: "darkcyan",height: 50, width: 100}} onClickCapture={()=>alert("Clicked")}>Visualize</button>
-          </div>
+
       <div className={"container"}>
         <Grid grid={grid}/>
       </div>
