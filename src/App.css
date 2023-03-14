@@ -9,6 +9,11 @@
 .container{
 
 }
-.visualize{
+.Control_Bar{
+  background-color: beige;
   text-align: center;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+
 }

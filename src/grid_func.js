@@ -5,12 +5,16 @@ import bfs from "./BFS";
 import dfs from "./DFS"
 
 const Grid = (props)=>{
-    const algo_enum = {BFS:1, DFS:2, Dijkstra:3};
+        const algo_enum = {BFS:1, DFS:2, Dijkstra:3};
         const grid = props.grid;
         const [trigger, set_trigger] = useState(false);
         const [algo, set_algo] = useState(algo_enum.DFS);
+        const [timer, set_timer] = useState(15);
         const ref = useRef(trigger);
         ref.current = trigger;
+        const [mouse_down, set_mouse_down] = useState(false);
+        const ref_mouse_down = useRef(mouse_down);
+        ref_mouse_down.current = mouse_down;
         const start = [10, 8];
         let order_arr = [];
         let path = [];
@@ -19,16 +23,16 @@ const Grid = (props)=>{
             setTimeout(()=> {
                 grid[order_arr[i][0]][order_arr[i][1]].visited = true;
                 set_trigger(!ref.current);
-            },10*i);
+            },timer*i);
         }
         setTimeout(()=> {
             for (let i = 0; i < path.length; i++) {
                 setTimeout(() => {
                     grid[path[i][0]][path[i][1]].in_path = true;
                     set_trigger(!ref.current);
-                }, 50 * i);
+                }, timer * i);
             }
-        },10*order_arr.length);
+        },timer*order_arr.length);
     }
     function reset_grid(){
         grid.map(e=>e.map(f=>{f.visited = false; f.in_path=false; f.dist=Infinity; f.completed = false;set_trigger(!trigger);}));
@@ -54,8 +58,7 @@ const Grid = (props)=>{
     }
         return (
             <>
-                <div className="Control Bar">
-                    <button style={{backgroundColor: "darkcyan",height: 50, width: 100}} onClickCapture={()=>visualize_handler()}>Visualize</button>
+                <div className="Control_Bar">
                     <label>
                         Algorithms
                         <select value={algo} onChange={(event)=>set_algo(JSON.parse(event.target.value))}>
@@ -64,13 +67,25 @@ const Grid = (props)=>{
                             <option value={algo_enum.Dijkstra}>Dijkstra</option>
                         </select>
                     </label>
+                    <button style={{backgroundColor: "darkcyan",height: 50, width: 100}} onClickCapture={()=>visualize_handler()}>Visualize</button>
+                    <button style={{backgroundColor: "turquoise", height: 40, width: 80}} onClickCapture={()=>clear_grid()}>Clear</button>
+                    <label>
+                        Speed
+                        <select value={timer} onChange={(event)=>set_timer(JSON.parse(event.target.value))}>
+                            <option value={0}>Instant</option>
+                            <option value={4}>Very fast</option>
+                            <option value={7}>Fast</option>
+                            <option value={15}>Moderate</option>
+                            <option value={20}>Slow</option>
+                            <option value={30}>Very slow</option>
+                        </select>
+                    </label>
                 </div>
                 <div className="Grid">
-                    {grid.map(e => e.map(f => <Node1 info={f}/>))}
+                    {grid.map(e => e.map(f => <Node1 info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down}/>))}
                     {grid[10][8].start = true}
                     {grid[10][32].target = true}
                     <button onClickCapture={() => grid.map(e => e.map(f => console.log(f)))}>Show</button>
-                    <button onClickCapture={()=>clear_grid()}>Clear</button>
                     <button onClickCapture={()=>reset_grid()}>Reset</button>
                 </div>
             </>
