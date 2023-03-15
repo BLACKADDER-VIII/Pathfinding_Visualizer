@@ -15,7 +15,10 @@ const Grid = (props)=>{
         const [mouse_down, set_mouse_down] = useState(false);
         const ref_mouse_down = useRef(mouse_down);
         ref_mouse_down.current = mouse_down;
-        const start = [10, 8];
+        const [grabbed_start, set_grabbed_start] = useState(false);
+        const ref_grabbed_start = useRef(grabbed_start);
+        ref_grabbed_start.current = grabbed_start;
+        const [start, set_start] = useState(props.start);
         let order_arr = [];
         let path = [];
     function animate(){
@@ -82,9 +85,9 @@ const Grid = (props)=>{
                     </label>
                 </div>
                 <div className="Grid">
-                    {grid.map(e => e.map(f => <Node1 info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down}/>))}
-                    {grid[10][8].start = true}
+                    {grid.map(e => e.map(f => <Node1 info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down} set_grabbed_start={set_grabbed_start} ref_grabbed_start={ref_grabbed_start} par_set_start={set_start} base_start = {props.start}/>))}
                     {grid[10][32].target = true}
+                    {grid[start[0]][start[1]].start = true}
                     <button onClickCapture={() => grid.map(e => e.map(f => console.log(f)))}>Show</button>
                     <button onClickCapture={()=>reset_grid()}>Reset</button>
                 </div>

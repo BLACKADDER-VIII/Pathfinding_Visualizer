@@ -2,7 +2,7 @@ import React from "react";
 import Node1 from './node';
 
 export default class node_info {
-    constructor(){
+    constructor(i,j){
         this.start = false;
         this.target = false;
         this.block = false;
@@ -12,5 +12,6 @@ export default class node_info {
         this.clear = true;
         this.dist = Infinity;
         this.completed = false;
+        this.coord = [i,j];
     }
 }

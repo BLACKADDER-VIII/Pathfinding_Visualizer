@@ -9,9 +9,10 @@ function App() {
     for (let i = 0; i < 20; i++) {
         grid[i] = new Array(40);
         for (let j = 0; j < 40; j++) {
-            grid[i][j]= new node_info();
+            grid[i][j]= new node_info(i,j);
         }
     }
+    const start = [10,8];
   return (
       <>
           <div>
@@ -19,7 +20,7 @@ function App() {
           </div>
 
       <div className={"container"}>
-        <Grid grid={grid}/>
+        <Grid grid={grid} start={start}/>
       </div>
       </>
   );
