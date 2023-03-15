@@ -19,6 +19,8 @@ const Grid = (props)=>{
         const ref_grabbed_start = useRef(grabbed_start);
         ref_grabbed_start.current = grabbed_start;
         const [start, set_start] = useState(props.start);
+        const ref_start = useRef(start);
+        ref_start.current = start;
         let order_arr = [];
         let path = [];
     function animate(){
@@ -37,6 +39,29 @@ const Grid = (props)=>{
             }
         },timer*order_arr.length);
     }
+    function instant_animate(){
+        reset_grid();
+        switch(algo){
+            case algo_enum.BFS: {
+                path = bfs(grid, start, order_arr);
+                break;
+            }
+            case algo_enum.DFS: {
+                path = dfs(grid, start, order_arr);
+                break;
+            }
+            default:
+                console.log(algo);
+        }
+        for (let i = 0; i < order_arr.length; i++) {
+                grid[order_arr[i][0]][order_arr[i][1]].visited = true;
+                set_trigger(!ref.current);
+        }
+            for (let i = 0; i < path.length; i++) {
+                    grid[path[i][0]][path[i][1]].in_path = true;
+                    set_trigger(!ref.current);
+            }
+        }
     function reset_grid(){
         grid.map(e=>e.map(f=>{f.visited = false; f.in_path=false; f.dist=Infinity; f.completed = false;set_trigger(!trigger);}));
     }
@@ -85,8 +110,9 @@ const Grid = (props)=>{
                     </label>
                 </div>
                 <div className="Grid">
-                    {grid.map(e => e.map(f => <Node1 info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down} set_grabbed_start={set_grabbed_start} ref_grabbed_start={ref_grabbed_start} par_set_start={set_start} base_start = {props.start}/>))}
+                    {grid.map(e => e.map(f => <Node1 info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down} set_grabbed_start={set_grabbed_start} ref_grabbed_start={ref_grabbed_start} par_set_start={set_start} base_start={props.start} render={instant_animate}/>))}
                     {grid[10][32].target = true}
+                    {grid.map(e=>e.map(f=>{f.start=false}))}
                     {grid[start[0]][start[1]].start = true}
                     <button onClickCapture={() => grid.map(e => e.map(f => console.log(f)))}>Show</button>
                     <button onClickCapture={()=>reset_grid()}>Reset</button>
