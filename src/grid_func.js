@@ -5,6 +5,9 @@ import bfs from "./BFS";
 import dfs from "./DFS"
 
 const Grid = (props)=>{
+        const [disabled, set_disabled] = useState(false);
+        const ref_disabled = useRef(disabled);
+        ref_disabled.current = disabled;
         const algo_enum = {BFS:1, DFS:2, Dijkstra:3};
         const grid = props.grid;
         const [trigger, set_trigger] = useState(false);
@@ -44,6 +47,9 @@ const Grid = (props)=>{
                 }, timer * i);
             }
         },timer*order_arr.length);
+        setTimeout(()=> {
+            set_disabled(false);
+        },timer*order_arr.length+timer*path.length);
     }
     function instant_animate(){
         reset_grid();
@@ -74,7 +80,17 @@ const Grid = (props)=>{
     function clear_grid(){
         grid.map(e=>e.map(f=>{f.block = false;f.visited = false; f.in_path = false; f.clear = !f.clear; f.completed = false; f.dist = Infinity;set_trigger(!trigger);}))
     }
+
+    function toggle_disable(){
+        if(ref_disabled.current){
+            console.log("Disabled");
+            return true;
+        }
+        else
+            return false;
+    }
     const visualize_handler = ()=>{
+        set_disabled(true);
         reset_grid();
         switch(algo){
             case algo_enum.BFS: {
@@ -101,8 +117,8 @@ const Grid = (props)=>{
                             <option value={algo_enum.Dijkstra}>Dijkstra</option>
                         </select>
                     </label>
-                    <button style={{backgroundColor: "darkcyan",height: 50, width: 100}} onClickCapture={()=>visualize_handler()}>Visualize</button>
-                    <button style={{backgroundColor: "turquoise", height: 40, width: 80}} onClickCapture={()=>clear_grid()}>Clear</button>
+                    <button disabled={ref_disabled.current} style={{backgroundColor: "darkcyan",height: 50, width: 100}} onClickCapture={()=>visualize_handler()}>Visualize</button>
+                    <button disabled={ref_disabled.current} style={{backgroundColor: "turquoise", height: 40, width: 80}} onClickCapture={()=>clear_grid()}>Clear</button>
                     <label>
                         Speed
                         <select value={timer} onChange={(event)=>set_timer(JSON.parse(event.target.value))}>
@@ -115,8 +131,8 @@ const Grid = (props)=>{
                         </select>
                     </label>
                 </div>
-                <div className="Grid">
-                    {grid.map(e => e.map(f => <Node1 info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down} set_grabbed_start={set_grabbed_start} set_grabbed_target = {set_grabbed_target} ref_grabbed_start={ref_grabbed_start} ref_grabbed_target={ref_grabbed_target} par_set_start={set_start} par_set_target={set_target} base_start={props.start} base_target={props.target} render={instant_animate}/>))}
+                <div className="Grid" >
+                    {grid.map(e => e.map(f => <Node1 disabled={ref_disabled.current} info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down} set_grabbed_start={set_grabbed_start} set_grabbed_target = {set_grabbed_target} ref_grabbed_start={ref_grabbed_start} ref_grabbed_target={ref_grabbed_target} par_set_start={set_start} par_set_target={set_target} base_start={props.start} base_target={props.target} render={instant_animate}/>))}
                     {grid.map(e=>e.map(f=>{f.start=false; f.target=false;}))}
                     {grid[target[0]][target[1]].target = true}
                     {grid[start[0]][start[1]].start = true}
