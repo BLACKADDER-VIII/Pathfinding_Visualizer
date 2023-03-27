@@ -18,9 +18,15 @@ const Grid = (props)=>{
         const [grabbed_start, set_grabbed_start] = useState(false);
         const ref_grabbed_start = useRef(grabbed_start);
         ref_grabbed_start.current = grabbed_start;
+        const [grabbed_target, set_grabbed_target] = useState(false);
+        const ref_grabbed_target = useRef(grabbed_target);
+        ref_grabbed_target.current = grabbed_target;
         const [start, set_start] = useState(props.start);
         const ref_start = useRef(start);
         ref_start.current = start;
+        const [target, set_target] = useState(props.target);
+        const ref_target = useRef(target);
+        ref_target.current = target;
         let order_arr = [];
         let path = [];
     function animate(){
@@ -110,9 +116,9 @@ const Grid = (props)=>{
                     </label>
                 </div>
                 <div className="Grid">
-                    {grid.map(e => e.map(f => <Node1 info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down} set_grabbed_start={set_grabbed_start} ref_grabbed_start={ref_grabbed_start} par_set_start={set_start} base_start={props.start} render={instant_animate}/>))}
-                    {grid[10][32].target = true}
-                    {grid.map(e=>e.map(f=>{f.start=false}))}
+                    {grid.map(e => e.map(f => <Node1 info={f} set_mouse_down={set_mouse_down} ref_mouse_down={ref_mouse_down} set_grabbed_start={set_grabbed_start} set_grabbed_target = {set_grabbed_target} ref_grabbed_start={ref_grabbed_start} ref_grabbed_target={ref_grabbed_target} par_set_start={set_start} par_set_target={set_target} base_start={props.start} base_target={props.target} render={instant_animate}/>))}
+                    {grid.map(e=>e.map(f=>{f.start=false; f.target=false;}))}
+                    {grid[target[0]][target[1]].target = true}
                     {grid[start[0]][start[1]].start = true}
                     <button onClickCapture={() => grid.map(e => e.map(f => console.log(f)))}>Show</button>
                     <button onClickCapture={()=>reset_grid()}>Reset</button>

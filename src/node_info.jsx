@@ -13,5 +13,5 @@ export default class node_info {
         this.dist = Infinity;
         this.completed = false;
         this.coord = [i,j];
-    }
+    };
 }

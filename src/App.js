@@ -13,6 +13,7 @@ function App() {
         }
     }
     const start = [10,8];
+    const target = [10, 32];
   return (
       <>
           <div>
@@ -20,7 +21,7 @@ function App() {
           </div>
 
       <div className={"container"}>
-        <Grid grid={grid} start={start}/>
+        <Grid grid={grid} start={start} target = {target}/>
       </div>
       </>
   );
