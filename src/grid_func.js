@@ -8,6 +8,9 @@ const Grid = (props)=>{
         const [disabled, set_disabled] = useState(false);
         const ref_disabled = useRef(disabled);
         ref_disabled.current = disabled;
+        const [has_visualized, set_has_visualized] = useState(false);
+        const ref_has_visualized = useRef(has_visualized);
+        ref_has_visualized.current = has_visualized;
         const algo_enum = {BFS:1, DFS:2, Dijkstra:3};
         const grid = props.grid;
         const [trigger, set_trigger] = useState(false);
@@ -52,6 +55,8 @@ const Grid = (props)=>{
         },timer*order_arr.length+timer*path.length);
     }
     function instant_animate(){
+        if(!has_visualized)
+            return;
         reset_grid();
         switch(algo){
             case algo_enum.BFS: {
@@ -75,14 +80,17 @@ const Grid = (props)=>{
             }
         }
     function reset_grid(){
+        //set_has_visualized(false);
         grid.map(e=>e.map(f=>{f.visited = false; f.in_path=false; f.dist=Infinity; f.completed = false;set_trigger(!trigger);}));
     }
     function clear_grid(){
+        set_has_visualized(false);
         grid.map(e=>e.map(f=>{f.block = false;f.visited = false; f.in_path = false; f.clear = !f.clear; f.completed = false; f.dist = Infinity;set_trigger(!trigger);}))
     }
 
     const visualize_handler = ()=>{
         set_disabled(true);
+        set_has_visualized(true);
         reset_grid();
         switch(algo){
             case algo_enum.BFS: {
