@@ -81,14 +81,6 @@ const Grid = (props)=>{
         grid.map(e=>e.map(f=>{f.block = false;f.visited = false; f.in_path = false; f.clear = !f.clear; f.completed = false; f.dist = Infinity;set_trigger(!trigger);}))
     }
 
-    function toggle_disable(){
-        if(ref_disabled.current){
-            console.log("Disabled");
-            return true;
-        }
-        else
-            return false;
-    }
     const visualize_handler = ()=>{
         set_disabled(true);
         reset_grid();
