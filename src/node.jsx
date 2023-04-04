@@ -37,12 +37,14 @@ const Node1 = (props)=>{
         if(props.ref_mouse_down.current) {
             if (props.ref_grabbed_start.current) {
                 set_start(true);
+                set_block(false);
                 props.par_set_start(props.info.coord);
                 props.base_start[0] = props.info.coord[0];
                 props.base_start[1] = props.info.coord[1];
             }
             else if(props.ref_grabbed_target.current){
                 set_target(true);
+                set_block(false);
                 props.par_set_target(props.info.coord);
                 props.base_target[0] = props.info.coord[0];
                 props.base_target[1] = props.info.coord[1];
@@ -68,7 +70,7 @@ const Node1 = (props)=>{
     useEffect(()=>{props.info.start = ref_start.current}, [ref_start.current]);
     useEffect(()=>{props.info.target=ref_target.current}, [ref_target.current]);
         return(
-            <button disabled={props.disabled} style={{backgroundColor: bg_set(), padding: 6, borderWidth: 0.1,borderColor:"black", margin: 0, height: 30 }} onMouseDown={()=>handle_mouse_down()} onMouseOver={()=>handle_mouse_over()} onMouseUp={()=>handle_mouse_up()} onDoubleClick={()=>console.log(start, props.info.start)}></button>
+            <button disabled={props.disabled} style={{backgroundColor: bg_set(), padding: 6, borderWidth: 0.1,borderColor:"black", margin: 0, height: 30 }} onMouseDown={()=>handle_mouse_down()} onMouseOver={()=>handle_mouse_over()} onMouseUp={()=>handle_mouse_up()} onDoubleClick={()=>console.log(props.info)}></button>
         );
 }
 

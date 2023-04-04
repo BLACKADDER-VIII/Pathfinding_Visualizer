@@ -3,6 +3,7 @@ import Node1 from './node'
 import { useState} from "react";
 import bfs from "./BFS";
 import dfs from "./DFS"
+import dijkstra from "./Dijkstra";
 
 const Grid = (props)=>{
         const [disabled, set_disabled] = useState(false);
@@ -67,6 +68,9 @@ const Grid = (props)=>{
                 path = dfs(grid, start, order_arr);
                 break;
             }
+            case algo_enum.Dijkstra: {
+                path = dijkstra(grid, start, order_arr);
+            }
             default:
                 console.log(algo);
         }
@@ -99,6 +103,10 @@ const Grid = (props)=>{
             }
             case algo_enum.DFS: {
                 path = dfs(grid, start, order_arr);
+                break;
+            }
+            case algo_enum.Dijkstra: {
+                path = dijkstra(grid, start, order_arr);
                 break;
             }
             default:
