@@ -17,10 +17,10 @@ const Node1 = (props)=>{
         if(target)
             return "yellow";
         if(block)
-            return "green";
-        if(in_path)
             return "black";
-        return visited? "cyan":"blue";
+        if(in_path)
+            return "lime";
+        return visited? "cyan":"white";
     }
     function handle_mouse_down(){
         props.set_mouse_down(true);
