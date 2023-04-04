@@ -4,6 +4,8 @@ import { useState} from "react";
 import bfs from "./BFS";
 import dfs from "./DFS"
 import dijkstra from "./Dijkstra";
+import Select from 'react-select'
+import {bounce} from 'react-animations';
 
 const Grid = (props)=>{
         const [disabled, set_disabled] = useState(false);
@@ -12,7 +14,7 @@ const Grid = (props)=>{
         const [has_visualized, set_has_visualized] = useState(false);
         const ref_has_visualized = useRef(has_visualized);
         ref_has_visualized.current = has_visualized;
-        const algo_enum = {BFS:1, DFS:2, Dijkstra:3};
+        const algo_enum = {BFS:0, DFS:1, Dijkstra:2};
         const grid = props.grid;
         const [trigger, set_trigger] = useState(false);
         const [algo, set_algo] = useState(algo_enum.DFS);
@@ -36,6 +38,7 @@ const Grid = (props)=>{
         ref_target.current = target;
         let order_arr = [];
         let path = [];
+        const alg_options = [{ value: algo_enum.BFS, label: 'BFS'}, { value: algo_enum.DFS, label: 'DFS'}, {value: algo_enum.Dijkstra, label: 'Dijkstra'}];
     function animate(){
         for (let i = 0; i < order_arr.length; i++) {
             setTimeout(()=> {
@@ -117,13 +120,8 @@ const Grid = (props)=>{
         return (
             <>
                 <div className="Control_Bar">
-                    <label>
-                        Algorithms
-                        <select value={algo} onChange={(event)=>set_algo(JSON.parse(event.target.value))}>
-                            <option value={algo_enum.BFS}>BFS</option>
-                            <option value={algo_enum.DFS}>DFS</option>
-                            <option value={algo_enum.Dijkstra}>Dijkstra</option>
-                        </select>
+                    <label style={{width: 200, fontSize: 18, color: 'darkcyan',}}>Algorithm
+                        <Select classNamePrefix={"sl_alg"} styles={{control: (df)=>({...df, backgroundColor: 'cyan', margin: 5}), option:(df)=>({...df, backgroundColor: 'cyan'})}} value={{value: algo, label: alg_options[algo].label}} options={alg_options} onChange={(event)=>set_algo(JSON.parse(event.value))}/>
                     </label>
                     <button disabled={ref_disabled.current} style={{backgroundColor: "darkcyan",height: 50, width: 100}} onClickCapture={()=>visualize_handler()}>Visualize</button>
                     <button disabled={ref_disabled.current} style={{backgroundColor: "turquoise", height: 40, width: 80}} onClickCapture={()=>clear_grid()}>Clear</button>

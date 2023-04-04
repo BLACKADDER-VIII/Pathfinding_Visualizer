@@ -6,9 +6,7 @@
   outline: black 1px;
   padding: 0;
 }
-.container{
 
-}
 .Control_Bar{
   background-color: beige;
   text-align: center;
@@ -17,3 +15,35 @@
   grid-template-columns: repeat(4,1fr);
 
 }
+
+.sl_alg__menu{
+  color: black;
+  animation: growDown 500ms;
+}
+
+.sl_alg__option:hover{
+  background-color: darkcyan;
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0)
+  }
+  80% {
+    transform: scaleY(1.1)
+  }
+  100% {
+    transform: scaleY(1)
+  }
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1.5, 1.5);
+  }
+}
+
+
