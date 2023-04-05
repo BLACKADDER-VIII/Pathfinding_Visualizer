@@ -22,7 +22,58 @@
 }
 
 .sl_alg__option:hover{
-  background-color: darkcyan;
+  background-color: turquoise;
+  cursor: pointer;
+}
+
+.sl_alg__control:hover{
+  background-color: turquoise;
+  cursor: pointer;
+}
+
+.sl_spd__menu{
+  color: black;
+  animation: growDown 500ms;
+}
+
+.sl_spd__option:hover{
+  background-color: turquoise;
+  cursor: pointer;
+}
+
+.sl_spd__control:hover{
+  background-color: turquoise;
+  cursor: pointer;
+}
+
+.Vis_btn{
+  background-color: cyan;
+  height: 50px;
+  width: 200px;
+  font-size: 18px;
+}
+.Vis_btn:hover{
+  background-color: turquoise;
+  cursor: pointer;
+}
+
+.clr_btn{
+  background-color: grey;
+  height: 50px;
+  width: 200px;
+  font-size: 18px;
+  color: white
+}
+.clr_btn:hover{
+  background-color: black;
+  cursor: pointer;
+}
+
+.Node1:hover{
+  animation: zoom-in-zoom-out 200ms;
+}
+.Node1:focus{
+  animation: zoom-in-zoom-out 100ms;
 }
 
 @keyframes growDown {
@@ -41,8 +92,11 @@
   0% {
     transform: scale(1, 1);
   }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
   100% {
-    transform: scale(1.5, 1.5);
+    transform: scale(1,1);
   }
 }
 

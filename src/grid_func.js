@@ -18,7 +18,8 @@ const Grid = (props)=>{
         const grid = props.grid;
         const [trigger, set_trigger] = useState(false);
         const [algo, set_algo] = useState(algo_enum.DFS);
-        const [timer, set_timer] = useState(15);
+        const [timer, set_timer] = useState(4);
+        const [timer_label, set_timer_label] = useState('Very Fast');
         const ref = useRef(trigger);
         ref.current = trigger;
         const [mouse_down, set_mouse_down] = useState(false);
@@ -39,7 +40,8 @@ const Grid = (props)=>{
         let order_arr = [];
         let path = [];
         const alg_options = [{ value: algo_enum.BFS, label: 'BFS'}, { value: algo_enum.DFS, label: 'DFS'}, {value: algo_enum.Dijkstra, label: 'Dijkstra'}];
-    function animate(){
+        const speed_options = [{value: 0, label: 'Instant'}, {value: 4, label: 'Very Fast'}, {value: 7, label: 'Fast'}, {value: 12, label: 'Moderate'}, {value: 20, label: 'Slow'}, {value: 30, label: 'Very Slow'}];
+        function animate(){
         for (let i = 0; i < order_arr.length; i++) {
             setTimeout(()=> {
                 grid[order_arr[i][0]][order_arr[i][1]].visited = true;
@@ -123,18 +125,11 @@ const Grid = (props)=>{
                     <label style={{width: 200, fontSize: 18, color: 'darkcyan',}}>Algorithm
                         <Select classNamePrefix={"sl_alg"} styles={{control: (df)=>({...df, backgroundColor: 'cyan', margin: 5}), option:(df)=>({...df, backgroundColor: 'cyan'})}} value={{value: algo, label: alg_options[algo].label}} options={alg_options} onChange={(event)=>set_algo(JSON.parse(event.value))}/>
                     </label>
-                    <button disabled={ref_disabled.current} style={{backgroundColor: "darkcyan",height: 50, width: 100}} onClickCapture={()=>visualize_handler()}>Visualize</button>
-                    <button disabled={ref_disabled.current} style={{backgroundColor: "turquoise", height: 40, width: 80}} onClickCapture={()=>clear_grid()}>Clear</button>
+                    <button className={'Vis_btn'} disabled={ref_disabled.current} onClickCapture={()=>visualize_handler()}>Visualize</button>
+                    <button className={'clr_btn'} disabled={ref_disabled.current} onClickCapture={()=>clear_grid()}>Clear</button>
                     <label>
                         Speed
-                        <select value={timer} onChange={(event)=>set_timer(JSON.parse(event.target.value))}>
-                            <option value={0}>Instant</option>
-                            <option value={4}>Very fast</option>
-                            <option value={7}>Fast</option>
-                            <option value={15}>Moderate</option>
-                            <option value={20}>Slow</option>
-                            <option value={30}>Very slow</option>
-                        </select>
+                        <Select classNamePrefix={'sl_spd'} styles={{control: (df)=>({...df, backgroundColor: 'cyan', margin: 5}), option:(df)=>({...df, backgroundColor: 'cyan'})}} value={{value: timer, label: timer_label}} options={speed_options} onChange={(event)=>{set_timer(JSON.parse(event.value));set_timer_label(event.label)}}/>
                     </label>
                 </div>
                 <div className="Grid" >

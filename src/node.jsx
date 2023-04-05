@@ -22,6 +22,10 @@ const Node1 = (props)=>{
             return "lime";
         return visited? "cyan":"white";
     }
+    function img_set(){
+        if(ref_start.current)
+            return `url(https://i.ebayimg.com/images/g/B~gAAOSwhNthhdjn/s-l500.jpg)`;
+    }
     function handle_mouse_down(){
         props.set_mouse_down(true);
         if(start){
@@ -70,7 +74,7 @@ const Node1 = (props)=>{
     useEffect(()=>{props.info.start = ref_start.current}, [ref_start.current]);
     useEffect(()=>{props.info.target=ref_target.current}, [ref_target.current]);
         return(
-            <button className={'Node1'} disabled={props.disabled} style={{backgroundColor: bg_set(), padding: 6, borderWidth: 0.1,borderColor:"black", margin: 0, height: 30 }} onMouseDown={()=>handle_mouse_down()} onMouseOver={()=>handle_mouse_over()} onMouseUp={()=>handle_mouse_up()} onDoubleClick={()=>console.log(props.info)}></button>
+            <button className={'Node1'} disabled={props.disabled} style={{backgroundColor: bg_set(), backgroundImage: img_set(), backgroundSize: 'cover',padding: 6, borderWidth: 0.1,borderColor:"black", margin: 0, height: 30 }} onMouseDown={()=>handle_mouse_down()} onMouseOver={()=>handle_mouse_over()} onMouseUp={()=>handle_mouse_up()} onDoubleClick={()=>console.log(props.info)}></button>
         );
 }
 
