@@ -15,12 +15,12 @@ export default function dijkstra(grid1,start, order_arr) {
     while(minQ.length){
         Heap.heapify(minQ, custom_comp);
         curr = minQ.shift();
+        if(curr.dist == Infinity){
+            break;
+        }
         order_arr.push(curr.coord);
         if(curr.target){
             t_found = true;
-            break;
-        }
-        if(curr.dist == Infinity){
             break;
         }
         //Adjusting curr's neighbors
