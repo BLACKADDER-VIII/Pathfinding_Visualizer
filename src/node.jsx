@@ -12,10 +12,6 @@ const Node1 = (props)=>{
     ref_target.current = target;
 
     function bg_set(){
-        if(ref_start.current)
-            return "red";
-        if(target)
-            return "yellow";
         if(block)
             return "black";
         if(in_path)
@@ -24,7 +20,9 @@ const Node1 = (props)=>{
     }
     function img_set(){
         if(ref_start.current)
-            return `url(https://i.ebayimg.com/images/g/B~gAAOSwhNthhdjn/s-l500.jpg)`;
+            return `url(https://img.pokemondb.net/artwork/large/pikachu.jpg)`;
+        if(ref_target.current)
+            return `url(https://img.pokemondb.net/artwork/large/charizard.jpg)`;
     }
     function handle_mouse_down(){
         props.set_mouse_down(true);

@@ -5,7 +5,6 @@ import bfs from "./BFS";
 import dfs from "./DFS"
 import dijkstra from "./Dijkstra";
 import Select from 'react-select'
-import {bounce} from 'react-animations';
 
 const Grid = (props)=>{
         const [disabled, set_disabled] = useState(false);
@@ -47,6 +46,7 @@ const Grid = (props)=>{
                 grid[order_arr[i][0]][order_arr[i][1]].visited = true;
                 set_trigger(!ref.current);
             },timer*i);
+
         }
         setTimeout(()=> {
             for (let i = 0; i < path.length; i++) {
@@ -75,6 +75,7 @@ const Grid = (props)=>{
             }
             case algo_enum.Dijkstra: {
                 path = dijkstra(grid, start, order_arr);
+                break;
             }
             default:
                 console.log(algo);
