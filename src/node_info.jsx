@@ -11,6 +11,7 @@ export default class node_info {
         this.in_path = false;
         this.clear = true;
         this.dist = Infinity;
+        this.heurist = Infinity;
         this.completed = false;
         this.coord = [i,j];
     };
