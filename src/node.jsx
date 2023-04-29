@@ -71,9 +71,9 @@ const Node1 = (props)=>{
     useEffect(()=>{props.info.block = block}, [block]);
     useEffect(()=>{props.info.start = ref_start.current}, [ref_start.current]);
     useEffect(()=>{props.info.target=ref_target.current}, [ref_target.current]);
-        return(
-            <button className={'Node1'} disabled={props.disabled} style={{backgroundColor: bg_set(), backgroundImage: img_set(), backgroundSize: 'cover',padding: 6, borderWidth: 0.1,borderColor:"black", margin: 0, height: 30 }} onMouseDown={()=>handle_mouse_down()} onMouseOver={()=>handle_mouse_over()} onMouseUp={()=>handle_mouse_up()} onDoubleClick={()=>console.log(props.info)}></button>
-        );
+    return(
+        <button className={'Node1'} disabled={props.disabled} style={{backgroundColor: bg_set(), backgroundImage: img_set(), backgroundSize: 'cover',padding: 6, borderWidth: 0.1,borderColor:"black", margin: 0, height: 30 }} onMouseDown={()=>handle_mouse_down()} onMouseOver={()=>handle_mouse_over()} onMouseUp={()=>handle_mouse_up()} onDoubleClick={()=>console.log(props.info)}></button>
+    );
 }
 
 export default Node1;
