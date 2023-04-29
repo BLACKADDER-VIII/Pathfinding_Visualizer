@@ -19,7 +19,7 @@ const Node1 = (props)=>{
         return visited? "cyan":"white";
     }
     function img_set(){
-        if(ref_start.current)
+        if(start)
             return `url(https://img.pokemondb.net/artwork/large/pikachu.jpg)`;
         if(ref_target.current)
             return `url(https://img.pokemondb.net/artwork/large/charizard.jpg)`;

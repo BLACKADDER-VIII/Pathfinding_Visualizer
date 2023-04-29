@@ -5,6 +5,7 @@ import bfs from "./BFS";
 import dfs from "./DFS"
 import dijkstra from "./Dijkstra";
 import Select from 'react-select'
+import A_star from "./A_star";
 
 const Grid = (props)=>{
     const [disabled, set_disabled] = useState(false);
@@ -13,7 +14,7 @@ const Grid = (props)=>{
     const [has_visualized, set_has_visualized] = useState(false);
     const ref_has_visualized = useRef(has_visualized);
     ref_has_visualized.current = has_visualized;
-    const algo_enum = {BFS:0, DFS:1, Dijkstra:2};
+    const algo_enum = {BFS:0, DFS:1, Dijkstra:2, A_star: 3};
     const grid = props.grid;
     const [trigger, set_trigger] = useState(false);
     const [algo, set_algo] = useState(algo_enum.DFS);
@@ -38,7 +39,7 @@ const Grid = (props)=>{
     ref_target.current = target;
     let order_arr = [];
     let path = [];
-    const alg_options = [{ value: algo_enum.BFS, label: 'BFS'}, { value: algo_enum.DFS, label: 'DFS'}, {value: algo_enum.Dijkstra, label: 'Dijkstra'}];
+    const alg_options = [{ value: algo_enum.BFS, label: 'BFS'}, { value: algo_enum.DFS, label: 'DFS'}, {value: algo_enum.Dijkstra, label: 'Dijkstra'}, {value: algo_enum.A_star, label: 'A Star'}];
     const speed_options = [{value: 0, label: 'Instant'}, {value: 4, label: 'Very Fast'}, {value: 7, label: 'Fast'}, {value: 12, label: 'Moderate'}, {value: 20, label: 'Slow'}, {value: 30, label: 'Very Slow'}];
     function animate(){
         for (let i = 0; i < order_arr.length; i++) {
@@ -61,8 +62,10 @@ const Grid = (props)=>{
         },timer*order_arr.length+timer*path.length);
     }
     function instant_animate(){
-        if(!has_visualized)
+        if(!has_visualized) {
+            set_trigger(!trigger);
             return;
+        }
         reset_grid();
         switch(algo){
             case algo_enum.BFS: {
@@ -75,6 +78,10 @@ const Grid = (props)=>{
             }
             case algo_enum.Dijkstra: {
                 path = dijkstra(grid, start, order_arr);
+                break;
+            }
+            case algo_enum.A_star:{
+                path = A_star(grid, start, target, order_arr);
                 break;
             }
             default:
@@ -113,6 +120,10 @@ const Grid = (props)=>{
             }
             case algo_enum.Dijkstra: {
                 path = dijkstra(grid, start, order_arr);
+                break;
+            }
+            case algo_enum.A_star:{
+                path = A_star(grid, start, target, order_arr);
                 break;
             }
             default:
